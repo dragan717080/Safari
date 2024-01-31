@@ -1,0 +1,46 @@
+.home-title {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    line-height: 1.2;
+    animation-delay: 1s;
+    color: #f1683a;
+    font-size: 5em;
+    font-weight: bold;
+    line-height: 1.3em;
+    text-transform: uppercase;
+}
+
+.home-title.animate::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1683a;
+    animation: a-ltr-before 2s cubic-bezier(.77,0,.18,1) forwards;
+    transform: translateX(0);
+}
+
+.home-title.animate::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation: a-ltr-after 0.7s cubic-bezier(.77,0,.18,1) forwards;
+    transform: translateX(-101%);
+}
+
+@keyframes a-ltr-after{
+    0% {transform: translateX(-100%)}
+    100% {transform: translateX(101%)}
+}
+
+@keyframes a-ltr-before{
+    0% {transform: translateX(0)}
+    100% {transform: translateX(200%)}
+}

@@ -90,6 +90,10 @@ export default {
       fontFamily: {
         worksans: ['Work Sans', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif']
+      },
+      spacing: {
+        '7/10': '70%',
+        '4/5': '80%'
       }
     }
   },

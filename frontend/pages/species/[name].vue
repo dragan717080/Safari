@@ -3,20 +3,41 @@
     <Header />
     <div v-if="species" class="min-h-screen">
       <div class="banner">
-        <NuxtImg :src="species.banner" :alt="name" class="d-full absolute" />
-        <div class="absolute top-1/2 left-1/2 row">
+        <div class="constant-background">
+          <NuxtImg
+            :src="allSubspecies[activeIndex].imageUrl"
+            :alt="allSubspecies[activeIndex].name"
+            class="-z-10"
+          />
+        </div>
+        <NuxtImg
+          ref="speciesImg"
+          :src="allSubspecies[activeIndex].imageUrl"
+          :alt="name"
+          class="d-full absolute species-img"
+        />
+        <div class="absolute top-1/2 left-1/4 row gap-12">
           <ul
             ref="subspeciesListRef"
             class="mask-holder glow-list"
             @mouseover="handleSubspeciesMouseOver"
             @mouseout="handleSubspeciesMouseOut"
           >
-            <li v-for="(item, index) in subspecies" :key="index" @click="setActiveIndex(index)">
-              {{ item.name }}
+            <li v-for="(subspecies, index) in allSubspecies" :key="index" class="pointer" @click="setActiveIndex(index)">
+              {{ subspecies.name }}
             </li>
           </ul>
           <div class="content">
-            1
+            <div
+              :key="activeIndex"
+              class="home-title"
+              :class="{ 'animate': titleAnimationStates[activeIndex] }"
+            >
+              {{ allSubspecies[activeIndex].name }}
+            </div>
+            <div class="description max-w-7/10 ml-auto mr-auto">
+              {{ allSubspecies[activeIndex].description }}
+            </div>
           </div>
         </div>
       </div>
@@ -27,6 +48,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import '~/assets/css/species.css'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 let name = (route.params.name as string)
@@ -53,19 +75,36 @@ const subspeciesQuery = `*[_type == 'subspecies' && species->name == '${name}'] 
   description
 }`
 
-const activeIndex: ref<number> = ref(0)
+const activeIndex = ref<number>(0)
+
+const subspeciesData = await useSanityQuery(subspeciesQuery)
+const allSubspecies = subspeciesData.data.value
+console.log(allSubspecies)
+
+const titleAnimationStates = ref(allSubspecies.map(() => false))
+
+const speciesImg = ref<HTMLImageElement | null>(null)
+
+const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 watchEffect(() => {
   console.log('new active index', activeIndex.value)
+  titleAnimationStates.value = titleAnimationStates.value.map((_: unknown, index: number) => index === activeIndex.value)
+  if (speciesImg.value) {
+    const imgElement = speciesImg.value
+
+    console.log(imgElement.$el.classList)
+
+    imgElement.$el.classList.contains('hide')
+      ? imgElement.$el.classList.remove('hide')
+      : imgElement.$el.classList.add('hide')
+    console.log(imgElement.$el.classList)
+  }
 })
 
 const setActiveIndex = (index: number) => {
   activeIndex.value = index
 }
-
-const subspeciesData = await useSanityQuery(subspeciesQuery)
-const subspecies = subspeciesData.data.value
-console.log(subspecies)
 
 const subspeciesListRef = ref<HTMLUListElement | null>(null)
 
@@ -76,7 +115,6 @@ const handleSubspeciesMouseOver = () => {
 }
 
 const handleSubspeciesMouseOut = () => {
-  console.log(subspeciesListRef.value)
   Array.from(subspeciesListRef.value!.getElementsByTagName('li')).forEach((subspeciesItem: HTMLLIElement, index: number) => {
     subspeciesItem.style.backgroundColor = index === activeIndex.value ? '#f75239' : 'inherit'
   })
@@ -109,5 +147,53 @@ onMounted(() => {
 
   .mask-holder li {
     padding: 0.75rem 2.1875rem;
+  }
+
+  .description {
+    animation-delay: 1.6s !important;
+    transform: translateY(50px);
+    filter: blur(20px);
+    opacity: 0;
+    color: #fff;
+    animation: showContent .5s 1s linear 1 forwards;
+  }
+
+  .species-img {
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 30px;
+    animation: showImage .5s linear 1 forwards;
+  }
+
+  .species-img.hide {
+    animation: hideImage 0s linear 1 forwards;
+  }
+
+  @keyframes showImage {
+    to {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+  }
+
+  @keyframes hideImage {
+      to {
+        height: 0;
+        width: 0;
+      }
+  }
+
+  @keyframes showContent {
+    to {
+        transform: translateY(0px);
+        filter: blur(0px);
+        opacity: 1;
+      }
   }
 </style>
