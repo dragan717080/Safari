@@ -48,6 +48,7 @@ export default defineNuxtConfig({
         projectId: process.env.projectId,
         storageBucket: process.env.storageBucket,
         messagingSenderId: process.env.messagingSenderId,
+        databaseURL: process.env.databaseURL,
         appId: process.env.appId
       }
     }

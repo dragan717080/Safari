@@ -35,6 +35,9 @@
             >
               {{ allSubspecies[activeIndex].name }}
             </div>
+            <div>
+              <country-flag country="it" size="big" />
+            </div>
             <div
               :key="activeIndex"
               class="description mask-holder max-w-7/10 ml-auto mr-auto"
@@ -53,7 +56,9 @@
 </template>
 <script setup lang="ts">
 import '~/assets/css/species.css'
+import CountryFlag from 'vue-country-flag-next'
 import { useRoute } from 'vue-router'
+import { ref as firebaseRef, onValue } from 'firebase/database'
 const route = useRoute()
 let name = (route.params.name as string)
 name = name.charAt(0).toUpperCase() + name.slice(1)
@@ -82,10 +87,11 @@ const subspeciesQuery = `*[_type == 'subspecies' && species->name == '${name}'] 
 const activeIndex = ref<number>(0)
 const prevIndex = ref<number>(0)
 
+const flags = ref(null)
+
 const subspeciesData = await useSanityQuery(subspeciesQuery)
 const allSubspecies = subspeciesData.data.value
-console.log(allSubspecies)
-
+// console.log(allSubspecies)
 const titleAnimationStates = ref(allSubspecies.map(() => false))
 
 const speciesImg = ref<HTMLImageElement | null>(null)
@@ -94,6 +100,24 @@ const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 interface Image extends HTMLImageElement {
   $el: HTMLImageElement
+}
+
+const getFlags = async () => {
+  const { $firebaseDb } = useNuxtApp()
+  console.log($firebaseDb)
+  const flagsRef = firebaseRef($firebaseDb, 'flags')
+  console.log(flagsRef)
+
+  onValue(flagsRef, (snapshot) => {
+    if (snapshot.exists()) {
+      const data = snapshot.val()
+      console.log('Data from flags:', data)
+    } else {
+      console.log('No data available')
+    }
+  }, (error) => {
+    console.error('Error getting data:', error)
+  })
 }
 
 watchEffect(() => {
@@ -133,8 +157,9 @@ const handleSubspeciesMouseOut = () => {
   })
 }
 
-onMounted(() => {
+onMounted(async () => {
   subspeciesListRef.value!.getElementsByTagName('li')[activeIndex.value].style.backgroundColor = '#f75239'
+  await getFlags()
 })
 </script>
 

@@ -1,17 +1,28 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { getDatabase } from 'firebase/database'
 import { defineNuxtPlugin } from '#app'
 
 export default defineNuxtPlugin(() => {
-  const config = useRuntimeConfig()
-  const { firebase } = config.public
-  const app = initializeApp({ ...firebase })
-  const auth = getAuth(app)
+  try {
+    const config = useRuntimeConfig()
+    const { firebase } = config.public
+    const app = initializeApp({ ...firebase })
+    const auth = getAuth(app)
+    // Realtime database
+    const db = getDatabase(app)
+    console.log('Firebase initialized successfully:', db)
 
-  return {
-    provide: {
-      firebaseApp: app,
-      firebaseAuth: auth
+    return {
+      provide: {
+        firebaseApp: app,
+        firebaseAuth: auth,
+        firebaseDb: db
+      }
     }
+  } catch (error) {
+    console.error('Error initializing Firebase:', error.message)
+    return {}
   }
+  return {}
 })

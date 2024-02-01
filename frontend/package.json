@@ -42,6 +42,7 @@
     "chokidar": "^3.5.3",
     "firebase": "^9.21.0",
     "firebase-admin": "^11.8.0",
-    "nuxi": "^3.10.0"
+    "nuxi": "^3.10.0",
+    "vue-country-flag-next": "^2.3.2"
   }
 }
