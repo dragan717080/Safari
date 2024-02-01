@@ -5,8 +5,8 @@
       <div class="banner">
         <div class="constant-background">
           <NuxtImg
-            :src="allSubspecies[activeIndex].imageUrl"
-            :alt="allSubspecies[activeIndex].name"
+            :src="allSubspecies[prevIndex].imageUrl"
+            :alt="allSubspecies[prevIndex].name"
             class="-z-10"
           />
         </div>
@@ -35,7 +35,11 @@
             >
               {{ allSubspecies[activeIndex].name }}
             </div>
-            <div class="description max-w-7/10 ml-auto mr-auto">
+            <div
+              :key="activeIndex"
+              class="description mask-holder max-w-7/10 ml-auto mr-auto"
+              :class="{ 'animate': titleAnimationStates[activeIndex] }"
+            >
               {{ allSubspecies[activeIndex].description }}
             </div>
           </div>
@@ -43,7 +47,7 @@
       </div>
     </div>
     <div class="row">
-      <Footer class="absolute bottom-[-0.75rem] row z-40" />
+      <Footer class="absolute bottom-0 row z-40" />
     </div>
   </div>
 </template>
@@ -76,6 +80,7 @@ const subspeciesQuery = `*[_type == 'subspecies' && species->name == '${name}'] 
 }`
 
 const activeIndex = ref<number>(0)
+const prevIndex = ref<number>(0)
 
 const subspeciesData = await useSanityQuery(subspeciesQuery)
 const allSubspecies = subspeciesData.data.value
@@ -87,23 +92,31 @@ const speciesImg = ref<HTMLImageElement | null>(null)
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
+interface Image extends HTMLImageElement {
+  $el: HTMLImageElement
+}
+
 watchEffect(() => {
   console.log('new active index', activeIndex.value)
   titleAnimationStates.value = titleAnimationStates.value.map((_: unknown, index: number) => index === activeIndex.value)
   if (speciesImg.value) {
-    const imgElement = speciesImg.value
+    const imgElement = (speciesImg.value as Image).$el
 
-    console.log(imgElement.$el.classList)
+    console.log(imgElement.classList)
 
-    imgElement.$el.classList.contains('hide')
-      ? imgElement.$el.classList.remove('hide')
-      : imgElement.$el.classList.add('hide')
-    console.log(imgElement.$el.classList)
+    imgElement.classList.contains('hide')
+      ? imgElement.classList.remove('hide')
+      : imgElement.classList.add('hide')
+    console.log(imgElement.classList)
   }
 })
 
-const setActiveIndex = (index: number) => {
+const setActiveIndex = async (index: number) => {
   activeIndex.value = index
+  const imgElement = (speciesImg.value as Image).$el
+  await wait(400)
+  if (!(imgElement.classList.contains('hide'))) { imgElement.classList.add('hide') }
+  prevIndex.value = index
 }
 
 const subspeciesListRef = ref<HTMLUListElement | null>(null)
@@ -127,7 +140,7 @@ onMounted(() => {
 
 <style scoped>
   .banner {
-    min-height: calc(100vh + 50px);
+    min-height: calc(98vh + 50px);
     margin-top: -50px;
     width: 100vw;
     overflow: hidden;
@@ -150,12 +163,13 @@ onMounted(() => {
   }
 
   .description {
-    animation-delay: 1.6s !important;
+    animation-delay: 0.7s !important;
     transform: translateY(50px);
     filter: blur(20px);
     opacity: 0;
     color: #fff;
     animation: showContent .5s 1s linear 1 forwards;
+    padding: 0.75rem 1.5rem;
   }
 
   .species-img {
@@ -177,8 +191,9 @@ onMounted(() => {
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: calc(98vh + 50px);
         border-radius: 0;
+        object-fit: cover;
     }
   }
 

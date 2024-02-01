@@ -29,6 +29,12 @@ const subspecies = {
       name: 'species',
       type: 'reference',
       to: [{type: 'species'}]
+    },
+    {
+      name: 'countries',
+      title: 'Countries',
+      type: 'array',
+      of: [{type: 'string'}]
     }
   ]
 }

@@ -9,6 +9,8 @@
     font-weight: bold;
     line-height: 1.3em;
     text-transform: uppercase;
+    width: 75%;
+    margin-inline: auto;
 }
 
 .home-title.animate::before {
@@ -41,6 +43,6 @@
 }
 
 @keyframes a-ltr-before{
-    0% {transform: translateX(0)}
+    0% {transform: translateX(200)}
     100% {transform: translateX(200%)}
 }
