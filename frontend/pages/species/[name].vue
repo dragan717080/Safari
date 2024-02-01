@@ -14,16 +14,16 @@
           ref="speciesImg"
           :src="allSubspecies[activeIndex].imageUrl"
           :alt="name"
-          class="d-full absolute species-img"
+          class="d-full absolute species-img hidden"
         />
-        <div class="absolute top-1/2 left-1/4 row gap-12">
+        <div class="absolute top-1/5 left-0 md:left-1/4 md:m-inline-auto col-h md:flex-row gap-12">
           <ul
             ref="subspeciesListRef"
             class="mask-holder glow-list"
             @mouseover="handleSubspeciesMouseOver"
             @mouseout="handleSubspeciesMouseOut"
           >
-            <li v-for="(subspecies, index) in allSubspecies" :key="index" class="pointer" @click="setActiveIndex(index)">
+            <li v-for="(subspecies, index) in allSubspecies" :key="index" class="pointer md:min-w-60" @click="setActiveIndex(index)">
               {{ subspecies.name }}
             </li>
           </ul>
@@ -35,8 +35,8 @@
             >
               {{ allSubspecies[activeIndex].name }}
             </div>
-            <div>
-              <country-flag country="it" size="big" />
+            <div class="row gap-6 my-5">
+              <country-flag v-for="(flag, index) in flags" :key="index" :country="flag.alpha" size="big" :title="flag.country" />
             </div>
             <div
               :key="activeIndex"
@@ -81,13 +81,15 @@ const subspeciesQuery = `*[_type == 'subspecies' && species->name == '${name}'] 
   _id, 
   name, 
   'imageUrl': images[0].asset->url,
-  description
+  description,
+  countries
 }`
 
 const activeIndex = ref<number>(0)
 const prevIndex = ref<number>(0)
 
-const flags = ref(null)
+const allFlags = ref([])
+const flags = ref([])
 
 const subspeciesData = await useSanityQuery(subspeciesQuery)
 const allSubspecies = subspeciesData.data.value
@@ -104,14 +106,14 @@ interface Image extends HTMLImageElement {
 
 const getFlags = async () => {
   const { $firebaseDb } = useNuxtApp()
-  console.log($firebaseDb)
   const flagsRef = firebaseRef($firebaseDb, 'flags')
   console.log(flagsRef)
 
   onValue(flagsRef, (snapshot) => {
     if (snapshot.exists()) {
-      const data = snapshot.val()
-      console.log('Data from flags:', data)
+      allFlags.value = snapshot.val()
+
+      console.log('new flags', allFlags.value)
     } else {
       console.log('No data available')
     }
@@ -123,6 +125,7 @@ const getFlags = async () => {
 watchEffect(() => {
   console.log('new active index', activeIndex.value)
   titleAnimationStates.value = titleAnimationStates.value.map((_: unknown, index: number) => index === activeIndex.value)
+  flags.value = allFlags.value.filter(flag => allSubspecies[activeIndex.value].countries.includes(flag.country))
   if (speciesImg.value) {
     const imgElement = (speciesImg.value as Image).$el
 
@@ -138,8 +141,15 @@ watchEffect(() => {
 const setActiveIndex = async (index: number) => {
   activeIndex.value = index
   const imgElement = (speciesImg.value as Image).$el
-  await wait(400)
-  if (!(imgElement.classList.contains('hide'))) { imgElement.classList.add('hide') }
+  await wait(600)
+  if (activeIndex.value || prevIndex.value) {
+    if (imgElement.classList.contains('hidden')) {
+      imgElement.classList.remove('hidden')
+      imgElement.classList.add('absolute')
+    }
+    console.log(activeIndex, prevIndex)
+    if (!(imgElement.classList.contains('hide'))) { imgElement.classList.add('hide') }
+  }
   prevIndex.value = index
 }
 

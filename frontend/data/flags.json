@@ -5,11 +5,6 @@
         "alpha2": "afg"
     },
     {
-        "country": "Åland Islands",
-        "alpha": "ax",
-        "alpha2": "ala"
-    },
-    {
         "country": "Albania",
         "alpha": "al",
         "alpha2": "alb"
@@ -130,7 +125,7 @@
         "alpha2": "btn"
     },
     {
-        "country": "Bolivia (Plurinational State of)",
+        "country": "Bolivia",
         "alpha": "bo",
         "alpha2": "bol"
     },
@@ -270,11 +265,6 @@
         "alpha2": "cog"
     },
     {
-        "country": "Congo, Democratic Republic of the",
-        "alpha": "cd",
-        "alpha2": "cod"
-    },
-    {
         "country": "Cook Islands",
         "alpha": "ck",
         "alpha2": "cok"
@@ -313,6 +303,11 @@
         "country": "Czechia",
         "alpha": "cz",
         "alpha2": "cze"
+    },
+    {
+        "country": "Democratic Republic of the Congo",
+        "alpha": "cd",
+        "alpha2": "cod"
     },
     {
         "country": "Denmark",
@@ -370,7 +365,7 @@
         "alpha2": "eth"
     },
     {
-        "country": "Falkland Islands (Malvinas)",
+        "country": "Falkland Island",
         "alpha": "fk",
         "alpha2": "flk"
     },
@@ -530,7 +525,7 @@
         "alpha2": "idn"
     },
     {
-        "country": "Iran (Islamic Republic of)",
+        "country": "Iran",
         "alpha": "ir",
         "alpha2": "irn"
     },
@@ -725,12 +720,12 @@
         "alpha2": "mex"
     },
     {
-        "country": "Micronesia (Federated States of)",
+        "country": "Micronesia",
         "alpha": "fm",
         "alpha2": "fsm"
     },
     {
-        "country": "Moldova, Republic of",
+        "country": "Moldova",
         "alpha": "md",
         "alpha2": "mda"
     },
@@ -915,7 +910,7 @@
         "alpha2": "rou"
     },
     {
-        "country": "Russian Federation",
+        "country": "Russia",
         "alpha": "ru",
         "alpha2": "rus"
     },
@@ -1180,7 +1175,7 @@
         "alpha2": "are"
     },
     {
-        "country": "United Kingdom of Great Britain and Northern Ireland",
+        "country": "United Kingdom",
         "alpha": "gb",
         "alpha2": "gbr"
     },
@@ -1210,12 +1205,12 @@
         "alpha2": "vut"
     },
     {
-        "country": "Venezuela (Bolivarian Republic of)",
+        "country": "Venezuela",
         "alpha": "ve",
         "alpha2": "ven"
     },
     {
-        "country": "Viet Nam",
+        "country": "Vietnam",
         "alpha": "vn",
         "alpha2": "vnm"
     },

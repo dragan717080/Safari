@@ -1,5 +1,4 @@
 Afghanistan	af	afg
-Åland Islands	ax	ala
 Albania	al	alb
 Algeria	dz	dza
 American Samoa	as	asm
@@ -24,7 +23,7 @@ Belize	bz	blz
 Benin	bj	ben
 Bermuda	bm	bmu
 Bhutan	bt	btn
-Bolivia (Plurinational State of)	bo	bol
+Bolivia	bo	bol
 Bonaire, Sint Eustatius and Saba	bq	bes
 Bosnia and Herzegovina	ba	bih
 Botswana	bw	bwa
@@ -52,7 +51,6 @@ Cocos (Keeling) Islands	cc	cck
 Colombia	co	col
 Comoros	km	com
 Congo	cg	cog
-Congo, Democratic Republic of the	cd	cod
 Cook Islands	ck	cok
 Costa Rica	cr	cri
 Côte d'Ivoire	ci	civ
@@ -61,6 +59,7 @@ Cuba	cu	cub
 Curaçao	cw	cuw
 Cyprus	cy	cyp
 Czechia	cz	cze
+Democratic Republic of the Congo 	cd	cod
 Denmark	dk	dnk
 Djibouti	dj	dji
 Dominica	dm	dma
@@ -72,7 +71,7 @@ Equatorial Guinea	gq	gnq
 Eritrea	er	eri
 Estonia	ee	est
 Ethiopia	et	eth
-Falkland Islands (Malvinas)	fk	flk
+Falkland Island	fk	flk
 Faroe Islands	fo	fro
 Fiji	fj	fji
 Finland	fi	fin
@@ -104,7 +103,7 @@ Hungary	hu	hun
 Iceland	is	isl
 India	in	ind
 Indonesia	id	idn
-Iran (Islamic Republic of)	ir	irn
+Iran	ir	irn
 Iraq	iq	irq
 Ireland	ie	irl
 Isle of Man	im	imn
@@ -143,8 +142,8 @@ Mauritania	mr	mrt
 Mauritius	mu	mus
 Mayotte	yt	myt
 Mexico	mx	mex
-Micronesia (Federated States of)	fm	fsm
-Moldova, Republic of	md	mda
+Micronesia	fm	fsm
+Moldova	md	mda
 Monaco	mc	mco
 Mongolia	mn	mng
 Montenegro	me	mne
@@ -181,7 +180,7 @@ Puerto Rico	pr	pri
 Qatar	qa	qat
 Réunion	re	reu
 Romania	ro	rou
-Russian Federation	ru	rus
+Russia	ru	rus
 Rwanda	rw	rwa
 Saint Barthélemy	bl	blm
 Saint Helena, Ascension and Tristan da Cunha	sh	shn
@@ -234,14 +233,14 @@ Tuvalu	tv	tuv
 Uganda	ug	uga
 Ukraine	ua	ukr
 United Arab Emirates	ae	are
-United Kingdom of Great Britain and Northern Ireland	gb	gbr
+United Kingdom	gb	gbr
 United States of America	us	usa
 United States Minor Outlying Islands	um	umi
 Uruguay	uy	ury
 Uzbekistan	uz	uzb
 Vanuatu	vu	vut
-Venezuela (Bolivarian Republic of)	ve	ven
-Viet Nam	vn	vnm
+Venezuela	ve	ven
+Vietnam	vn	vnm
 Virgin Islands (U.S.)	vi	vir
 Wallis and Futuna	wf	wlf
 Western Sahara	eh	esh
