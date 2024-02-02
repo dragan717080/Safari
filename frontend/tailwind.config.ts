@@ -92,6 +92,7 @@ export default {
         poppins: ['Poppins', 'sans-serif']
       },
       spacing: {
+        0.75: '3px',
         '1/10': '10%',
         '7/10': '70%',
         '1/5': '20%',

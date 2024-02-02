@@ -23,7 +23,9 @@
             SEE MORE
           </NuxtLink>
         </button>
-        <button>SUBSCRIBE</button>
+        <button class="pointer-events-none">
+          SUBSCRIBE
+        </button>
       </div>
     </div>
   </div>

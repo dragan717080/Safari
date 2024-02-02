@@ -295,3 +295,9 @@ body::-webkit-scrollbar-thumb {
     transition: transform 0.5;
     transform-origin: top;
 }
+
+.translate-down-gradually {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 1s, transform 1s;
+}

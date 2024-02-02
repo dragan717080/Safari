@@ -16,10 +16,10 @@
           :alt="name"
           class="d-full absolute species-img hidden"
         />
-        <div class="absolute top-1/5 left-0 md:left-1/4 md:m-inline-auto col-h md:flex-row gap-12">
+        <div class="absolute top-1/10 md:top-1/5 2xl:top-1/3 left-0 md:left-1/10 2xl:left-[15%] md:m-inline-auto col-h md:flex-row gap-1 md:gap-12 w-screen md:w-auto">
           <ul
             ref="subspeciesListRef"
-            class="mask-holder glow-list"
+            class="mask-holder glow-list md:mt-[10rem]"
             @mouseover="handleSubspeciesMouseOver"
             @mouseout="handleSubspeciesMouseOut"
           >
@@ -35,12 +35,12 @@
             >
               {{ allSubspecies[activeIndex].name }}
             </div>
-            <div class="row gap-6 my-5">
+            <div class="row gap-6 my-5 md:mb-5 2xl:mb-10 min-h-10">
               <country-flag v-for="(flag, index) in flags" :key="index" :country="flag.alpha" size="big" :title="flag.country" />
             </div>
             <div
               :key="activeIndex"
-              class="description mask-holder max-w-7/10 ml-auto mr-auto"
+              class="description mask-holder md:max-w-9/10 max-w-7/10 ml-auto mr-auto"
               :class="{ 'animate': titleAnimationStates[activeIndex] }"
             >
               {{ allSubspecies[activeIndex].description }}
@@ -49,9 +49,9 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <Footer class="absolute bottom-0 row z-40" />
-    </div>
+    <footer class="row">
+      <Footer class="absolute bottom-0 row z-40 species-footer" />
+    </footer>
   </div>
 </template>
 <script setup lang="ts">
@@ -70,12 +70,8 @@ const query = `*[_type == 'species' && name == '${name}'][0] {
   'banner': banner.asset->url
 }`
 
-console.log(query)
-
 const { data } = await useSanityQuery(query)
 const species = data.value
-console.log(species.name)
-console.log(species.banner)
 
 const subspeciesQuery = `*[_type == 'subspecies' && species->name == '${name}'] { 
   _id, 
@@ -93,7 +89,6 @@ const flags = ref([])
 
 const subspeciesData = await useSanityQuery(subspeciesQuery)
 const allSubspecies = subspeciesData.data.value
-// console.log(allSubspecies)
 const titleAnimationStates = ref(allSubspecies.map(() => false))
 
 const speciesImg = ref<HTMLImageElement | null>(null)
@@ -107,13 +102,10 @@ interface Image extends HTMLImageElement {
 const getFlags = async () => {
   const { $firebaseDb } = useNuxtApp()
   const flagsRef = firebaseRef($firebaseDb, 'flags')
-  console.log(flagsRef)
 
   onValue(flagsRef, (snapshot) => {
     if (snapshot.exists()) {
       allFlags.value = snapshot.val()
-
-      console.log('new flags', allFlags.value)
     } else {
       console.log('No data available')
     }
@@ -123,18 +115,14 @@ const getFlags = async () => {
 }
 
 watchEffect(() => {
-  console.log('new active index', activeIndex.value)
   titleAnimationStates.value = titleAnimationStates.value.map((_: unknown, index: number) => index === activeIndex.value)
   flags.value = allFlags.value.filter(flag => allSubspecies[activeIndex.value].countries.includes(flag.country))
   if (speciesImg.value) {
     const imgElement = (speciesImg.value as Image).$el
 
-    console.log(imgElement.classList)
-
     imgElement.classList.contains('hide')
       ? imgElement.classList.remove('hide')
       : imgElement.classList.add('hide')
-    console.log(imgElement.classList)
   }
 })
 
@@ -147,7 +135,6 @@ const setActiveIndex = async (index: number) => {
       imgElement.classList.remove('hidden')
       imgElement.classList.add('absolute')
     }
-    console.log(activeIndex, prevIndex)
     if (!(imgElement.classList.contains('hide'))) { imgElement.classList.add('hide') }
   }
   prevIndex.value = index
@@ -207,6 +194,11 @@ onMounted(async () => {
     padding: 0.75rem 1.5rem;
   }
 
+  .species-footer {
+    position: absolute;
+    top: 90vh;
+    bottom: auto;
+  }
   .species-img {
     width: 150px;
     height: 220px;

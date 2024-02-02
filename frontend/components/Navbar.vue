@@ -4,7 +4,7 @@ const getLink = (pageName: string) =>
 </script>
 
 <template>
-  <nav class="hidden md:flex h-30 px-14 md:pl-1 md:pr-2 lg:px-14 space-x-10">
+  <nav class="hidden md:flex h-30 px-14 md:pr-2 lg:px-14 md:space-x-7 lg:space-x-10 2xl:space-x-12">
     <div v-for="(item, index) in ['Home', 'Contacts', 'Info']" :key="index">
       <div class="group row-v space-x-0.5 hover:text-primary">
         <h2 class="">

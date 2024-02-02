@@ -47,17 +47,12 @@ const decrementActiveIndex = async () => {
     : activeIndex.value - 1
   hideSliderItems(activeIndex.value)
   setPrevIndex(activeIndex.value)
-  console.log(thumbnailIndexes.value)
-  console.log(activeIndex.value)
 
   // thumbnailIndexes.value = []
-  console.log([thumbnailIndexes.value.slice(-1)[0], ...thumbnailIndexes.value.slice(0, thumbnailIndexes.value.length - 1)])
   thumbnailIndexes.value = [thumbnailIndexes.value.slice(-1)[0], ...thumbnailIndexes.value.slice(0, thumbnailIndexes.value.length - 1)]
 
   await wait(10)
 
-  console.log('original src: ', thumbnailElement.value.getElementsByClassName('item')[0].getElementsByTagName('img')[0].getAttribute('alt'))
-  console.log('current src: ', thumbnailElement.value.getElementsByClassName('item')[0].getElementsByTagName('img')[0].getAttribute('alt'))
   thumbnailElement.value.getElementsByClassName('item')[0].getElementsByTagName('img')[0]
     .setAttribute('src', species[thumbnailIndexes.value[0]].imageUrl)
 }
@@ -67,8 +62,6 @@ watchEffect(() => {
 })
 
 const thumbnailIndexes = ref([...Object.keys(species).slice(1, species.length).map(index => parseInt(index)), 0])
-console.log(thumbnailIndexes.value)
-console.log(thumbnailIndexes.value.map(i => species[i].name))
 
 const nextElement = ref<HTMLButtonElement>(null!)
 const prevElement = ref<HTMLButtonElement>(null!)
@@ -125,7 +118,6 @@ let runNextAuto: ReturnType<typeof setTimeout> = setTimeout(() => {
 onMounted(() => {
   sliderItemElements = Array.from(sliderElement.value!.getElementsByClassName('item')) as HTMLDivElement[]
   thumbnailItemElements = Array.from(thumbnailElement.value!.getElementsByClassName('item')) as HTMLDivElement[]
-  // thumbnailElement.value.appendChild(thumbnailItemElements[0])
 
   nextElement.value!.addEventListener('click', () => {
     showSlider('next')

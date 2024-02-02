@@ -337,7 +337,7 @@
 /* Responsiveness */
 @media screen and (max-width: 700px) {
     .carousel {
-        min-height: calc(153vh + 50px);
+        min-height: calc(157vh + 50px);
     }
     .carousel .list .item .content {
         top: 12%;
@@ -346,19 +346,50 @@
         padding-left: 7vw;
     }
     .thumbnail {
-        bottom: 35vh;
         left: 0.625rem;
     }
     .arrows {
         width: 100%;
         max-width: 100%;
         justify-content: center;
+        top: auto;
+        bottom: 12vh;
         right: 0;
         margin-inline: auto;
     }
     .footer {
-        bottom: 5rem;
-        position: relative;
+        position: absolute;
+        top: 150vh;
+        bottom: auto;
+    }
+}
+
+@media screen and (min-width:700px) and (max-width: 1020px) {
+    .carousel {
+        min-height: calc(140vh + 50px);
+    }
+    .carousel .list .item .content {
+        top: 12%;
+    }
+    .buttons {
+        padding-left: 7vw;
+    }
+    .thumbnail {
+        left: 0.625rem;
+    }
+    .arrows {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        top: auto;
+        bottom: 10vh;
+        right: 0;
+        margin-inline: auto;
+    }
+    .footer {
+        position: absolute;
+        top: 139vh;
+        bottom: auto;
     }
     
     .footer div {

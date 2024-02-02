@@ -13,7 +13,6 @@ export default defineNuxtPlugin(async () => {
     if (token.value) {
       const result = await auth.verifyIdToken(token.value)
       user.value = formatUser(result)
-      console.log(user.value)
     }
   } catch (e) {
     // Not authenticated or invalid token
