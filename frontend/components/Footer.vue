@@ -9,6 +9,5 @@
     >
       <Icon name="carbon:logo-github" class="h-7 w-7 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-gray-200" />
     </a>
-    <DarkToggle />
   </div>
 </template>
