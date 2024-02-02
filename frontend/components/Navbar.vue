@@ -10,7 +10,7 @@ const getLink = (pageName: string) =>
         <h2 v-if="item === 'Home'" class="">
           <a :href="getLink(item)">{{ item }}</a>
         </h2>
-        <h2 v-if="item === 'Home'" class="">
+        <h2 v-else class="">
           <span>{{ item }}</span>
         </h2>
       </div>

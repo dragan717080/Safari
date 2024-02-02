@@ -1,4 +1,4 @@
-# Safari App
+# Safari 🌴 🐘 🐅 🦏 🦌
 
 Safari website built with Nuxt.js, TypeScript, Tailwind, Firebase and Sanity.
 
