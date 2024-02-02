@@ -179,8 +179,8 @@ onMounted(() => {
       <!-- time running -->
       <div class="time" />
     </div>
-    <div class="row">
-      <Footer class="absolute bottom-[-12rem] row z-40" />
-    </div>
+    <footer class="row">
+      <Footer class="absolute bottom-[-12rem] row z-40 footer" />
+    </footer>
   </div>
 </template>
