@@ -195,18 +195,18 @@
 }
 
 /* Avoid blank background by constantly having image when other images are sliding */
- .constant-background {
+.constant-background {
     height: 100%;
     width: 100%;
     position: absolute;
- }
+}
 
- .constant-background img {
+.constant-background img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     position: absolute;
- }
+}
 
 @keyframes showImage {
     to {

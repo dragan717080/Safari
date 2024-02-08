@@ -23,8 +23,10 @@
             SEE MORE
           </NuxtLink>
         </button>
-        <button class="pointer-events-none">
-          SUBSCRIBE
+        <button>
+          <NuxtLink :to="`locations?species=${getName()}`">
+            SUBSCRIBE
+          </NuxtLink>
         </button>
       </div>
     </div>

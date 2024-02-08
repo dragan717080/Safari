@@ -9,8 +9,7 @@
             :alt="allSubspecies[prevIndex].name"
             class="-z-10"
           />
-        </div>
-        <NuxtImg
+        </div><NuxtImg
           ref="speciesImg"
           :src="allSubspecies[activeIndex].imageUrl"
           :alt="name"
@@ -99,7 +98,7 @@ interface Image extends HTMLImageElement {
   $el: HTMLImageElement
 }
 
-const getFlags = async () => {
+const getFlags = () => {
   const { $firebaseDb } = useNuxtApp()
   const flagsRef = firebaseRef($firebaseDb, 'flags')
 
@@ -163,10 +162,7 @@ onMounted(async () => {
 <style scoped>
   .banner {
     min-height: calc(98vh + 50px);
-    margin-top: -50px;
-    width: 100vw;
     overflow: hidden;
-    position: relative;
   }
 
   .mask-holder {

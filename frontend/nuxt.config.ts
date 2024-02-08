@@ -65,7 +65,8 @@ export default defineNuxtConfig({
     emulatorHost: 'http://127.0.0.1'
   },
   plugins: [
-    '~/plugins/firebase.client.ts'
+    '~/plugins/firebase.client.ts',
+    '~/plugins/getFlags.ts'
   ],
   testUtils: {},
   image: {

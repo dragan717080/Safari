@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import '~/assets/css/carousel.css'
 
-const query = `*[_type == 'species'][] { 
-  _id, 
+const query = `*[_type == 'species'][] {
   name, 
   'imageUrl': images[0].asset->url,
   description

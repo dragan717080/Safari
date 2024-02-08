@@ -17,24 +17,24 @@ const subspecies = {
       name: 'locations',
       title: 'Locations',
       type: 'array',
-      of: [{type: 'string'}]
+      of: [{ type: 'reference', to: [{ type: 'locations' }] }]
     },
     {
       name: 'images',
       title: 'Images',
       type: 'array',
-      of: [{type: 'image'}]
+      of: [{ type: 'image' }]
     },
     {
       name: 'species',
       type: 'reference',
-      to: [{type: 'species'}]
+      to: [{ type: 'species' }]
     },
     {
       name: 'countries',
       title: 'Countries',
       type: 'array',
-      of: [{type: 'string'}]
+      of: [{ type: 'string' }]
     }
   ]
 }

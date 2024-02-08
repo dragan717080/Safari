@@ -17,13 +17,13 @@ const species = {
       name: 'locations',
       title: 'Locations',
       type: 'array',
-      of: [{type: 'string'}]
+      of: [{ type: 'string' }]
     },
     {
       name: 'images',
       title: 'Images',
       type: 'array',
-      of: [{type: 'image'}]
+      of: [{ type: 'image' }]
     },
     {
       name: 'banner',
