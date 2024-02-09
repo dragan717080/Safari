@@ -65,7 +65,6 @@
     }
     .species-footer {
         top: 154vh !important;
-        background: red;
     }
     @media screen and (min-height: 750px) {
         .banner {

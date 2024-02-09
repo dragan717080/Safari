@@ -11,7 +11,6 @@ export default defineNuxtPlugin(() => {
     const auth = getAuth(app)
     // Realtime database
     const db = getDatabase(app)
-    console.log('Firebase initialized successfully:')
 
     return {
       provide: {

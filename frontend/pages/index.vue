@@ -56,10 +56,6 @@ const decrementActiveIndex = async () => {
     .setAttribute('src', species[thumbnailIndexes.value[0]].imageUrl)
 }
 
-watchEffect(() => {
-  console.log('activeIndex changed:', activeIndex.value)
-})
-
 const thumbnailIndexes = ref([...Object.keys(species).slice(1, species.length).map(index => parseInt(index)), 0])
 
 const nextElement = ref<HTMLButtonElement>(null!)
